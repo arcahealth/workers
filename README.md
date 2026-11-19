@@ -19,7 +19,7 @@ workers/
 │   └── .gitkeep
 ├── .editorconfig                # Workspace formatting rules
 ├── .gitignore                   # Monorepo git ignore patterns
-├── .nvmrc                       # Pinned Node.js version (22)
+├── .nvmrc                       # Pinned Node.js version (26.13.1)
 ├── package.json                 # Monorepo root scripts & dev dependencies
 ├── pnpm-lock.yaml               # Pnpm lockfile
 ├── pnpm-workspace.yaml          # Monorepo workspace definitions & build authorizations
@@ -35,9 +35,11 @@ workers/
 
 ## Prerequisites
 
-- **Node.js**: `^20.0.0` or `^22.0.0` (managed via `.nvmrc`)
-- **pnpm**: `^9.0.0` or `^10.0.0+` (`packageManager: pnpm@12.21.0`)
-- **Cloudflare Account**: With access to Workers and Wrangler CLI (wrangler is bundled locally in `devDependencies`)
+- **Node.js**: `>=26.0.0` (pinned to `26.13.1` in `.nvmrc`)
+- **pnpm**: `>=12.0.0` (`packageManager: pnpm@12.21.0`)
+- **TypeScript**: `^7.0.2`
+- **Wrangler**: `^4.165.0`
+- **Workers Types**: `^5.20261119.1`
 
 ---
 
@@ -128,7 +130,7 @@ To add a new Cloudflare Worker to the monorepo:
      "$schema": "node_modules/wrangler/config-schema.json",
      "name": "<worker-name>",
      "main": "src/index.ts",
-     "compatibility_date": "2025-02-14",
+     "compatibility_date": "2026-11-19",
      "compatibility_flags": ["nodejs_compat"]
    }
    ```
@@ -165,6 +167,7 @@ To add a new Cloudflare Worker to the monorepo:
 ## Continuous Integration
 
 Every push and pull request to `main` is validated via [GitHub Actions](.github/workflows/ci.yml) against:
+- Pinned Node.js version via `.nvmrc`
 - Workspace lockfile integrity (`--frozen-lockfile`)
 - Monorepo-wide TypeScript typechecking
 - Automated test suites
